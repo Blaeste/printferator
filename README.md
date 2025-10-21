@@ -9,7 +9,7 @@
 
 ## ⚡ Installation ultra-rapide
 
-```bash```bash
+```bash
 
 git clone https://github.com/Blaeste/printferator.git
 
