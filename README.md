@@ -7,11 +7,11 @@
 > Testeur modulaire et facilement adaptable pour **ft_printf** et d'autres fonctions de l'École 42. Configuration simple par variables.
 
 
-## ⚡ Installation ultra-rapide (copier/coller)## 🎯 Utilisation Rapide
+## ⚡ Installation ultra-rapide
 
 ```bash```bash
 
-git clone https://github.com/Blaeste/printferator.git# Tester ft_printf
+git clone https://github.com/Blaeste/printferator.git
 
 cd printferator./tester.py ./printf
 
