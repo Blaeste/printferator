@@ -61,15 +61,15 @@ Fonctionne avec Python 3.6+ (installé par défaut sur les machines 42).
 
 ## 💡 Utilisation rapide
 
-# Lister tous les tests disponibles
+### Lister tous les tests disponibles
 
 ./tester.py /chemin/vers/printf --list
 
-# Exécuter tous les tests
+### Exécuter tous les tests
 
 ./tester.py /chemin/vers/printfprintferator/
 
-# Exécuter des tests spécifiques
+### Exécuter des tests spécifiques
 
 ./tester.py /chemin/vers/printf --run basic
 
@@ -77,16 +77,15 @@ Fonctionne avec Python 3.6+ (installé par défaut sur les machines 42).
 
 ./tester.py /chemin/vers/printf --run edge
 
-
-# Mode verbeux (progression + logs complets)
+### Mode verbeux (progression + logs complets)
 
 ./tester.py /chemin/vers/printf --verbose
 
-# Désactiver les couleurs (pratique pour les logs CI)
+### Désactiver les couleurs (pratique pour les logs CI)
 
 ./tester.py /chemin/vers/printf --no-color
 
-# Timeout personnalisé
+### Timeout personnalisé
 
 ./tester.py /chemin/vers/printf --timeout 10
 
