@@ -4,7 +4,7 @@
 [![Norminette](https://img.shields.io/badge/Norminette-100%25-blue)](https://github.com/42School/norminette)
 [![42 School](https://img.shields.io/badge/42-School-000000)](https://42.fr)
 
-> Testeur complet et pro pour ft_printf de l'École 42 — 30 tests exhaustifs, interface lisible, modulaire et facilement adaptable.> Testeur modulaire et facilement adaptable pour **ft_printf** et d'autres fonctions de l'École 42. Configuration simple par variables.
+> Testeur modulaire et facilement adaptable pour **ft_printf** et d'autres fonctions de l'École 42. Configuration simple par variables.
 
 
 ## ⚡ Installation ultra-rapide (copier/coller)## 🎯 Utilisation Rapide
