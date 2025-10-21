@@ -62,33 +62,33 @@ Fonctionne avec Python 3.6+ (installé par défaut sur les machines 42).
 ## 💡 Utilisation rapide
 
 ### Lister tous les tests disponibles
-
+```bash
 ./tester.py /chemin/vers/printf --list
-
+```
 ### Exécuter tous les tests
-
+```bash
 ./tester.py /chemin/vers/printfprintferator/
-
+```
 ### Exécuter des tests spécifiques
-
+```bash
 ./tester.py /chemin/vers/printf --run basic
 
 ./tester.py /chemin/vers/printf --run hex
 
 ./tester.py /chemin/vers/printf --run edge
-
+```
 ### Mode verbeux (progression + logs complets)
-
+```bash
 ./tester.py /chemin/vers/printf --verbose
-
+```
 ### Désactiver les couleurs (pratique pour les logs CI)
-
+```bash
 ./tester.py /chemin/vers/printf --no-color
-
+```
 ### Timeout personnalisé
-
+```bash
 ./tester.py /chemin/vers/printf --timeout 10
-
+```
 
 - 🎨 **Interface colorée** avec émojis
 
