@@ -4,7 +4,7 @@
 [![Norminette](https://img.shields.io/badge/Norminette-100%25-blue)](https://github.com/42School/norminette)
 [![42 School](https://img.shields.io/badge/42-School-000000)](https://42.fr)
 
-> Testeur modulaire et facilement adaptable pour **ft_printf** et d'autres fonctions de l'École 42. Configuration simple par variables.
+> Testeur modulaire et facilement adaptable pour **ft_printf** et d'autres fonctions de l'École 42.
 
 
 ## ⚡ Installation ultra-rapide
@@ -27,11 +27,9 @@ cd printferator./tester.py ./printf
 
 ``````
 
-**C'est tout ! Aucune dépendance requise.**## 🔧 Adaptation Facile
+**C'est tout ! Aucune dépendance requise.**
 
 Fonctionne avec Python 3.6+ (installé par défaut sur les machines 42).
-
-Le tester est **modulaire** et s'adapte facilement à d'autres fonctions en modifiant la configuration :
 
 ---
 
@@ -39,24 +37,18 @@ Le tester est **modulaire** et s'adapte facilement à d'autres fonctions en modi
 
 ## ✨ Points forts```python
 
-CONFIG.FUNCTION_NAME = "ft_printf"
+- ✅ Norminette intégrée (vérification automatique)
 
-- ✅ Norminette intégrée (vérification automatique)CONFIG.PROJECT_NAME = "printferator"
-
-- 🧪 30 tests exhaustifs avec cas limites et edge casesCONFIG.DEFAULT_TEST_MODULE = "t_printf"
-
-- 🔧 **Modulaire** — Facilement adaptable à d'autres projets```
+- 🧪 30 tests exhaustifs avec cas limites et edge cases
 
 - 🎨 Interface claire avec séparation printf() vs ft_printf()
 
-- 🧾 Logs complets et métriques détaillées### Pour ft_atoi
+- 🧾 Logs complets et métriques détaillées
 
-- ⏱️ Timeout configurable pour éviter les boucles infinies```python
+- ⏱️ Timeout configurable pour éviter les boucles infinies
 
 
-
-## 🎯 Couverture des tests (30)CONFIG.PROJECT_NAME = "atoiterator"
-
+## 🎯 Couverture des tests (30)
 
 - 📂 **printf** — Tests de ft_printf: 30 tests```
 
@@ -67,50 +59,39 @@ CONFIG.FUNCTION_NAME = "ft_printf"
   - Edge cases: pointeurs null, caractères spéciaux, formats complexes```python
 
 
-## 💡 Utilisation rapideCONFIG.PROJECT_NAME = "libfterator"
-
-
-```bash```
+## 💡 Utilisation rapide
 
 # Lister tous les tests disponibles
 
-./tester.py /chemin/vers/printf --list## 📁 Structure
+./tester.py /chemin/vers/printf --list
 
-
-
-# Exécuter tous les tests```
+# Exécuter tous les tests
 
 ./tester.py /chemin/vers/printfprintferator/
 
-├── tester.py              # Script principal (modulaire)
+# Exécuter des tests spécifiques
 
-# Exécuter des tests spécifiques├── config_examples.py     # Exemples de configuration
+./tester.py /chemin/vers/printf --run basic
 
-./tester.py /chemin/vers/printf --run basic├── tests/
+./tester.py /chemin/vers/printf --run hex
 
-./tester.py /chemin/vers/printf --run hex│   ├── t_printf.py       # Tests pour ft_printf
-
-./tester.py /chemin/vers/printf --run edge│   ├── t_atoi.py         # Tests pour ft_atoi
-
-│   └── ...               # Autres tests
-
-# Mode verbeux (progression + logs complets)└── printf/               # Ton code ft_printf
-
-./tester.py /chemin/vers/printf --verbose    ├── ft_printf.c
-
-    ├── ft_printf.h
-
-# Désactiver les couleurs (pratique pour les logs CI)    └── Makefile
-
-./tester.py /chemin/vers/printf --no-color```
+./tester.py /chemin/vers/printf --run edge
 
 
+# Mode verbeux (progression + logs complets)
 
-# Timeout personnalisé## ✨ Fonctionnalités
+./tester.py /chemin/vers/printf --verbose
+
+# Désactiver les couleurs (pratique pour les logs CI)
+
+./tester.py /chemin/vers/printf --no-color
+
+# Timeout personnalisé
 
 ./tester.py /chemin/vers/printf --timeout 10
 
-```- 🎨 **Interface colorée** avec émojis
+
+- 🎨 **Interface colorée** avec émojis
 
 - 📊 **Statistiques détaillées** des tests
 
@@ -132,7 +113,7 @@ CONFIG.FUNCTION_NAME = "ft_printf"
 
 ## 🌟 Fonctionnalités avancées1. **Modifie la config** dans `tester.py` :
 
-   ```python
+
 
 ### 🔧 Modularité totale   CONFIG.FUNCTION_NAME = "ma_fonction"
 
