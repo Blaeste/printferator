@@ -1,4 +1,4 @@
-# 🚀 Printferator 2025# �️ Printferator - Tester Modulaire
+# 🚀 Printferator 2025 - Tester Modulaire
 
 [![Tests](https://img.shields.io/badge/Tests-30%2F30-brightgreen)](https://github.com/Blaeste/printferator)
 [![Norminette](https://img.shields.io/badge/Norminette-100%25-blue)](https://github.com/42School/norminette)
