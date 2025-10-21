@@ -13,7 +13,7 @@
 
 git clone https://github.com/Blaeste/printferator.git
 
-cd printferator./tester.py ./printf
+cd printferator
 
 ```
 
