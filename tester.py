@@ -147,6 +147,7 @@ def print_header():
     print(f"  {CLR['cyan']}./tester.py /path/printf --verbose{CLR['reset']}      - Mode verbose (plus de détails)")
     print(f"  {CLR['cyan']}./tester.py /path/printf --no-color{CLR['reset']}     - Désactiver les couleurs")
     print(f"  {CLR['cyan']}./tester.py /path/printf --timeout N{CLR['reset']}    - Timeout de N secondes (défaut: {DEFAULT_TIMEOUT}s)")
+    print(f"  {CLR['cyan']}./tester.py /path/printf --clear{CLR['reset']}        - Nettoyer le dossier build avant les tests")
     print(f"")
     print(f"{CLR['dim']}Exemples :{CLR['reset']}")
     print(f"  {CLR['yellow']}./tester.py ./printf --run basic{CLR['reset']}        - Tester les formats de base")
@@ -194,12 +195,31 @@ while i < len(sys.argv):
             print("Erreur: Le timeout doit être un nombre entier")
             sys.exit(1)
         i += 1
+    elif a == "--clear":
+        # Nettoyer plusieurs dossiers avant de continuer
+        root = Path(__file__).resolve().parent
+        dirs_to_clean = [
+            root / "build",
+            root / "out",
+            root / "tests" / "__pycache__"
+        ]
+
+        cleaned_dirs = []
+        for dir_path in dirs_to_clean:
+            if dir_path.exists():
+                shutil.rmtree(dir_path)
+                cleaned_dirs.append(dir_path.name)
+
+        if cleaned_dirs:
+            print(f"{CLR['cyan']}🧹 Dossiers nettoyés: {', '.join(cleaned_dirs)}{CLR['reset']}")
+        else:
+            print(f"{CLR['dim']}ℹ️  Tous les dossiers sont déjà propres{CLR['reset']}")
     else:
         argv.append(a)
     i += 1
 
 if len(argv) < 1:
-    print("Usage: ./tester.py /chemin/vers/printf [--verbose] [--list] [--run PATTERN] [--no-color] [--safe] [--timeout SECONDS]")
+    print("Usage: ./tester.py /chemin/vers/printf [--verbose] [--list] [--run PATTERN] [--no-color] [--safe] [--timeout SECONDS] [--clear]")
     sys.exit(1)
 
 printf = Path(argv[0]).resolve()
