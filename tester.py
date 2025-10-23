@@ -202,7 +202,7 @@ if len(argv) < 1:
     print("Usage: ./tester.py /chemin/vers/printf [--verbose] [--list] [--run PATTERN] [--no-color] [--safe] [--timeout SECONDS]")
     sys.exit(1)
 
-libft = Path(argv[0]).resolve()
+printf = Path(argv[0]).resolve()
 
 # ===============================================================
 # 🧹 Norminette — config
@@ -246,19 +246,19 @@ def check_makefile_rules():
             if rule in ["all", "$(NAME)"]:
                 # Tester la compilation
                 result = subprocess.run(
-                    ["make", "-C", str(libft), rule if rule != "$(NAME)" else "all"],
+                    ["make", "-C", str(printf), rule if rule != "$(NAME)" else "all"],
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
                     timeout=TIMEOUT * 3  # Plus de temps pour la compilation
                 )
                 # Vérifier que le fichier libftprintf.a existe
-                if result.returncode == 0 and (libft / "libftprintf.a").exists():
+                if result.returncode == 0 and (printf / "libftprintf.a").exists():
                     statuses.append("ok")
                 else:
                     statuses.append("error")
             elif rule == "clean":
                 result = subprocess.run(
-                    ["make", "-C", str(libft), "clean"],
+                    ["make", "-C", str(printf), "clean"],
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
                     timeout=TIMEOUT
@@ -266,7 +266,7 @@ def check_makefile_rules():
                 statuses.append("ok" if result.returncode == 0 else "error")
             elif rule == "fclean":
                 result = subprocess.run(
-                    ["make", "-C", str(libft), "fclean"],
+                    ["make", "-C", str(printf), "fclean"],
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
                     timeout=TIMEOUT
@@ -274,18 +274,18 @@ def check_makefile_rules():
                 statuses.append("ok" if result.returncode == 0 else "error")
             elif rule == "re":
                 result = subprocess.run(
-                    ["make", "-C", str(libft), "re"],
+                    ["make", "-C", str(printf), "re"],
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
                     timeout=TIMEOUT * 3  # Plus de temps pour la recompilation
                 )
-                if result.returncode == 0 and (libft / "libftprintf.a").exists():
+                if result.returncode == 0 and (printf / "libftprintf.a").exists():
                     statuses.append("ok")
                 else:
                     statuses.append("error")
             elif rule == "bonus":
                 result = subprocess.run(
-                    ["make", "-C", str(libft), "bonus"],
+                    ["make", "-C", str(printf), "bonus"],
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
                     timeout=TIMEOUT * 3  # Plus de temps pour la compilation bonus
@@ -340,13 +340,13 @@ def build_printf():
 
     try:
         # Compiler d'abord la partie obligatoire
-        subprocess.run(["make", "-C", str(libft), "re"],
+        subprocess.run(["make", "-C", str(printf), "re"],
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-        ensure_path(libft / "libftprintf.a", "libftprintf.a")
+        ensure_path(printf / "libftprintf.a", "libftprintf.a")
 
         # Essayer de compiler les bonus aussi (si ils existent)
         try:
-            subprocess.run(["make", "-C", str(libft), "bonus"],
+            subprocess.run(["make", "-C", str(printf), "bonus"],
                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
         except subprocess.CalledProcessError:
             # Les bonus ne sont peut-être pas disponibles, ce n'est pas grave
@@ -456,18 +456,18 @@ def compile_harness(root: Path, name: str, source: str, logger=None) -> Path:
     src.write_text(source)
 
     # Discover include directories: prefer standard locations and any folder containing ft_printf.h
-    include_dirs = [str(libft)]  # Always include the libft root directory first
+    include_dirs = [str(printf)]  # Always include the printf root directory first
 
     # Check for common include directory names
     common_inc_names = ["inc", "include", "includes", "headers"]
     for inc_name in common_inc_names:
-        p = libft / inc_name
+        p = printf / inc_name
         if p.is_dir():
             include_dirs.append(str(p))
 
     # Also scan all subdirectories for ft_printf.h and add their parent dir
     try:
-        for header_file in libft.rglob("ft_printf.h"):
+        for header_file in printf.rglob("ft_printf.h"):
             parent = header_file.parent
             parent_str = str(parent)
             if parent_str not in include_dirs:
@@ -476,7 +476,7 @@ def compile_harness(root: Path, name: str, source: str, logger=None) -> Path:
         pass
 
     inc_flags = [f"-I{p}" for p in include_dirs]
-    lib = "-L" + str(libft)
+    lib = "-L" + str(printf)
     cmd = [os.environ.get("CC", "cc"), "-Wall", "-Wextra", "-Werror"] + inc_flags + [str(src), lib, "-lftprintf", "-o", str(exe)]
 
     try:
@@ -643,12 +643,12 @@ def run_norminette(log_path: Path, logger=None):
 
     # Au lieu d'analyser tout le dossier, analyser seulement les fichiers .c et .h
     # pour éviter les fichiers de test comme tester.py
-    c_files = list(libft.glob("*.c"))
-    h_files = list(libft.glob("*.h"))
+    c_files = list(printf.glob("*.c"))
+    h_files = list(printf.glob("*.h"))
 
     # Aussi chercher dans les sous-dossiers standards (src/, include/, etc.)
     for subdir in ["src", "srcs", "sources", "include", "includes", "inc", "headers"]:
-        subdir_path = libft / subdir
+        subdir_path = printf / subdir
         if subdir_path.exists() and subdir_path.is_dir():
             c_files.extend(subdir_path.glob("*.c"))
             h_files.extend(subdir_path.glob("*.h"))
@@ -658,7 +658,7 @@ def run_norminette(log_path: Path, logger=None):
     if not all_files:
         # Aucun fichier .c/.h trouvé, fallback vers le dossier complet
         # mais avec exclusions explicites pour les dossiers de test
-        args.append(str(libft))
+        args.append(str(printf))
 
         # Ajouter des exclusions explicites si la norminette les supporte
         test_dirs_to_exclude = ["libfterator", "tests", "test", ".git", "__pycache__", "out"]
@@ -666,7 +666,7 @@ def run_norminette(log_path: Path, logger=None):
 
         # Essayer d'ajouter --exclude pour chaque pattern (certaines versions de norminette le supportent)
         for exclude in test_dirs_to_exclude + test_files_to_exclude:
-            exclude_path = libft / exclude.rstrip('*')
+            exclude_path = printf / exclude.rstrip('*')
             if exclude_path.exists() or exclude in ["*.py", "*.pyc", "tester.py"]:
                 # Ajouter l'exclusion (silencieusement - certaines norminettes ne supportent pas --exclude)
                 try:
@@ -712,7 +712,7 @@ def main():
 
     root = Path(__file__).resolve().parent
     tests_dir = root / "tests"
-    ensure_path(libft / "Makefile", "Makefile libft")
+    ensure_path(printf / "Makefile", "Makefile printf")
 
     (root / "build").mkdir(exist_ok=True)
     (root / "out").mkdir(exist_ok=True)
